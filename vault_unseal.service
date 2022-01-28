@@ -1,0 +1,13 @@
+[Unit]
+Description=Vault Unseal System
+After=network.target vault_awaken.service
+
+[Service]
+User=service_account
+EnvironmentFile=/etc/environment
+WorkingDirectory=/opt/vaultserver/
+ExecStartPre=/bin/sleep 30
+ExecStart=/bin/bash -c "/opt/vaultserver/unseal.sh"
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,13 @@
+[Unit]
+Description=Vault BootSystem Awaken
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+User=service_account
+WorkingDirectory=/opt/vaultserver/
+ExecStartPre=/bin/bash -c "export DOCKER_HOST=127.0.0.1:8200/ui/"
+ExecStart=-/bin/bash -c "docker-compose up || exit 0"
+
+[Install]
+WantedBy=multi-user.target
